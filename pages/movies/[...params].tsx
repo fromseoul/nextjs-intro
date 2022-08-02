@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import Seo from "../../components/Seo";
 
 type Props = {
   params: any;
@@ -13,6 +14,8 @@ export default function Detail({ params }: Props) {
 
   return (
     <div>
+      {/* eslint-disable-next-line react/jsx-no-undef */}
+      <Seo title={title} />
       <h4>{title || "loading..."}</h4>
     </div>
   );
