@@ -1,30 +1,36 @@
 import { useEffect, useState } from "react";
 import Seo from "../components/Seo";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 type Props = {
   results: any;
 };
 
 export default function Home({ results }: Props) {
-  const [movies, setMovies] = useState([]);
+  const router = useRouter();
 
-  // useEffect(() => {
-  //   const getInitialState = async () => {
-  //     const { results } = await (await fetch(`/api/movies`)).json();
-  //     console.log(results)
-  //     setMovies(results);
-  //   }
-  //   getInitialState();
-  // }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  const onMovieClick = (id: string, title: string) => {
+    // router.push(`/movies/${id}`);
+    router.push(`/movies/${title}/${id}`);
+  };
 
   return (
     <div className="container">
       <Seo title="Home" />
-      {/*{!movies && <h4>Loading...</h4>}*/}
+
       {results.map((movie: any) => (
-        <div className="movie" key={movie.id}>
+        <div
+          key={movie.id}
+          className="movie"
+          onClick={() => onMovieClick(movie.id, movie.original_title)}
+        >
           <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} />
-          <h4>{movie.original_title}</h4>
+          <Link href={`/movies/${movie.original_title}/${movie.id}`}>
+            <a>
+              <h4>{movie.original_title}</h4>
+            </a>
+          </Link>
         </div>
       ))}
       <style jsx>{`
