@@ -8,9 +8,7 @@ type Props = {
 export default function Detail({ params }: Props) {
   const router = useRouter();
 
-  // @ts-ignore
   const [title, id] = params.params || [];
-  // console.log(aaa);
 
   return (
     <div>
